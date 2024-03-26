@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  backend:
+    restart: on-failure
+    build: backend
+    container_name: backend
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres
+    container_name: db
+    restart: on-failure
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_HOST: ${DB_HOST}
+    volumes:
+      - data-db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  data-db:
