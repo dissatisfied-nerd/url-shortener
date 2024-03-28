@@ -19,7 +19,6 @@ import (
 
 func main() {
 	logger := logging.GetLogger()
-
 	ctx := context.Background()
 
 	var cfg config.Config
